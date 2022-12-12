@@ -7,9 +7,9 @@ export class ImportCompletionProvider implements CompletionItemProvider {
     if (!line.includes('from') && !line.includes('import')) return [];
 
     const parts = line.split(' ');
-    if (parts.length == 1 || parts[-1] === 'import') return [];
     const first = parts[0];
     const last = parts[parts.length - 1];
+    if (parts.length == 1 || last === 'import') return [];
     if (first !== last && first === 'from' && last !== 'import' && !last.endsWith(',')) {
       return [{ label: 'import' }];
     }
